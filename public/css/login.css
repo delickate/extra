@@ -1,0 +1,169 @@
+html, body{
+            overflow-x: unset !important;
+        }
+        .form-box {
+            width: 100%;
+            height: 100vh;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        form {
+            width: 100%;
+            padding: 0 30px;
+        }
+        .form-box .footer{
+            padding: 10px 0;
+        }
+        .form-logo{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+        }
+        .form-logo img{
+          width: 100%;
+          max-width: 85px;
+        }
+        .input-style{
+            padding: 5px 5px;
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 10px;
+        }
+        .input-style>input{
+          background: transparent;
+          border: 1px solid #CFCFCF;
+          border-radius: 5px;
+          color: #CFCFCF;
+          font-weight: 400;
+          font-size: 14px;
+          font-family: "Poppins";
+          padding: 6px 10px;
+          height: 42px;
+        }
+        .input-style>.input-group>input{
+          padding-left: 30px;
+        }
+        .email_label{
+            color: #495057;
+            font-weight: 500;
+            font-size: 14px;
+            font-family: "Poppins";
+        }
+        .tms{
+            color: #013F6A;
+            font-weight: 500;
+            font-size: 50px;
+            font-family: "Roboto";
+            text-align: center;
+            margin-bottom: 0;
+        }
+        /*.remember{
+          color: #030229;
+          font-weight: 400;
+          font-size: 14px;
+          font-family: "Nunito";
+        }
+        .forgot a{
+          color: #1D75DC;
+          font-weight: 400;
+          font-size: 14px;
+          font-family: "Nunito";
+        }*/
+        .register{
+            color: #101010;
+            font-weight: 400;
+            font-size: 16px;
+            font-family: "Poppins";
+        }
+        .register a{
+            color: #1D75DC;
+            font-weight: 400;
+            font-size: 16px;
+            font-family: "Poppins";
+            padding-left: 5px;
+        }
+        .btn-login{
+          background: #013F6A;
+          border-color: #013F6A;
+          width: 100%;
+          border-radius: 5px;
+          font-size: 16px;
+          font-weight: 400;
+          font-family: "Poppins";
+        }
+        .padding{
+            padding: 15px 15px;
+        }
+        .footer{
+          border: 0;
+        }
+        .left-bg{
+            background-image: url(../img/login-bg-1.png);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            height: 100vh;
+            position: relative;
+        }
+        .about_us{
+          position: absolute;
+          top: 25%;
+          left: 15%;
+          height: 319px;
+        }
+        .about_heading{
+          font-size: 40px;
+          font-weight: 600;
+          font-family: 'Poppins';
+          line-height: 1;
+          color: #9CE2A7;
+        }
+        .us{
+          font-size: 60px;
+          font-weight: 600;
+          font-family: 'Poppins';
+          color: #9CE2A7;
+        }
+        .about_us p{
+          font-size: 14px;
+          font-weight: 400;
+          font-family: 'Poppins';
+          color: #fff;
+          padding-top: 30px;
+          padding-left: 115px;
+          padding-right: 60px;
+        }
+        .psc_logo{
+            width: 100%;
+            max-width: 230px;
+        }
+        .bi-person{
+          position: absolute;
+          left: 10px;
+          z-index: 1;
+          top: 8px;
+          color: #8E8E8E;
+        }
+        .bi-lock{
+          position: absolute;
+          left: 10px;
+          z-index: 1;
+          top: 5px;
+          color: #8E8E8E;
+        }
+        @media screen and (max-width: 768px){
+          .form-box{
+            padding: 25px 0 0 0;
+          }
+          .about_us p{
+            padding-left: 0;
+          }
+          /*.left-bg{
+            display: none;
+          }*/
+        }

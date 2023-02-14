@@ -1,0 +1,114 @@
+<header>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <h6>IntelliTUT</h6>
+<!--                <img src="{{asset('images/logo.png')}}" alt="" class="header_logo" />-->
+            </a>
+            <button type="button" class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                
+                <!-- <a href="index.html" class="nav-item nav-link"><i class="fa fa-bell"></i></a> -->
+                
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- <header>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                <img src="{{asset('images/logo.png')}}" alt="" class="header_logo" /> <span>Social Welfare Department</span>
+            </a>
+            <button type="button" class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="fa fa-bars"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    @can('view-dashboard')
+                    <a href="{{ route('dashboard') }}" class="nav-item nav-link {{ (request()->is('') || request()->is('filter') ) ? 'active' : '' }}">Dashboard</a>
+                    @endcan
+
+                    @can('activity-log')
+                    <div class="dropdown">
+                        <a class="nav-item nav-link dropdown-toggle {{ (request()->is('activities*')) ? 'active' : '' }}" href="#" data-toggle="dropdown">
+                            Activity Log
+                        </a>
+                        <div class="dropdown-menu">
+                            @can('department-activities')
+                            <a class="dropdown-item {{ (request()->is('activities/department')) ? 'active' : '' }}" href="{{ route('department') }}">Department Activities</a>
+                            @endcan
+
+                            @can('citizen-activities')
+                            <a class="dropdown-item {{ (request()->is('activities/citizen')) ? 'active' : '' }}" href="{{ route('citizen') }}">Citizen Complaints</a>
+                            @endcan
+                        </div>
+                    </div>
+                    @endcan
+
+                    @can('view-reports')
+                    <a href="{{ route('report') }}" class="nav-item nav-link {{ (request()->is('report')) ? 'active' : '' }}">Reports</a>
+                    @endcan
+
+                    @php //echo auth()->user()->login_to_gms; @endphp
+
+                    @can('usermanagement')
+                    <div class="dropdown">
+                        <a class="nav-item nav-link dropdown-toggle {{ (request()->is('users*')) ? 'active' : '' }}" href="#" data-toggle="dropdown">
+                            Users
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item {{ (request()->is('users*')) ? 'active' : '' }}" href="{{ url('users') }}">Manage Users</a>
+                            <a class="dropdown-item {{ (request()->is('roles*')) ? 'active' : '' }}" href="{{ url('roles') }}">Manage Roles</a>
+                        </div>
+                    </div>
+                    @endcan
+
+
+
+                    @can('shelterhome-create')
+                    <div class="dropdown">
+                        <a class="nav-item nav-link dropdown-toggle {{ (request()->is('shelterhomes*')) ? 'active' : '' }}" href="#" data-toggle="dropdown">
+                            Panahgah
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item {{ (request()->is('shelterhomes/create')) ? 'active' : '' }}" href="{{ route('shelterhomes.create') }}">Add Panahgah</a>
+                            <a class="dropdown-item {{ (request()->is('shelterhomes')) ? 'active' : '' }}" href="{{ route('shelterhomes.index') }}">List Panahgah</a>
+                        </div>
+                    </div>
+                    @endcan
+
+                </div>
+
+
+
+
+                <div class="navbar-nav last-item">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            <img src="{{asset('images/user.png')}}" class="user_img"> 
+                            @auth
+                                {{ auth()->user()->name }}
+                            @else
+                                // not logged in
+                            @endauth
+
+                        </a>
+                        <div class="dropdown-menu">
+                           <a class="dropdown-item" href="{{ route('changepassword') }}">Change Password</a>
+                           <a class="dropdown-item" href="javascript:void" onclick="$('#logout-form').submit();">Logout</a>
+                        </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header> -->

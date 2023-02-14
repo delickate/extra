@@ -1,0 +1,147 @@
+<nav class="d-flex flex-column align-items-center align-items-sm-start min-vh-100 sidenav">
+    <a href="#" class="text-decoration-none">
+        <!-- <span >Menu</span> -->
+        <span style="color: #ffffff;
+            font-weight: 500;
+            font-size: 35px;
+            font-family: "Roboto";
+            text-align: center;">IntelliTut</span>
+    </a>
+    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+        @if (Auth::user()->hasRole('super-admin'))
+        <li class="nav-item">
+            <a href="{{ route('admin.dashboard') }}" class="nav-link align-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="20" viewBox="0 0 22 20" class="sidebar_svg dashboard_svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13 0H9C8.44771 0 8 0.447715 8 1V19C8 19.5523 8.44771 20 9 20H13C13.5523 20 14 19.5523 14 19V1C14 0.447715 13.5523 0 13 0ZM12 18H10V2H12V18ZM21 5H17C16.4477 5 16 5.44772 16 6V19C16 19.5523 16.4477 20 17 20H21C21.5523 20 22 19.5523 22 19V6C22 5.44772 21.5523 5 21 5ZM18 18V7H20V18H18ZM1 10H5C5.55228 10 6 10.4477 6 11V19C6 19.5523 5.55228 20 5 20H1C0.447715 20 0 19.5523 0 19V11C0 10.4477 0.447715 10 1 10ZM2 12V18H4V12H2Z" fill="white"/>
+                </svg> 
+                <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+            </a>
+        </li>
+        @endif
+        @if (Auth::user()->hasRole('super-admin'))
+        <li>
+          <a href="#submenu1" data-bs-toggle="collapse" class="nav-link align-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="24" viewBox="0 0 22 24" class="sidebar_svg flash_svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.99996 15.0001H9.86718L9.00768 21.876C8.88383 22.8669 10.1289 23.4074 10.7682 22.6402L20.7682 10.6402C21.311 9.98892 20.8478 9.00006 20 9.00006H12.1327L12.9922 2.1241C13.1161 1.13326 11.871 0.592776 11.2317 1.35988L1.23174 13.3599C0.688964 14.0112 1.15212 15.0001 1.99996 15.0001ZM4.135 13.0001L10.5846 5.26052L10.0077 9.87603C9.93307 10.4729 10.3985 11.0001 11 11.0001H17.8649L11.4153 18.7396L11.9922 14.1241C12.0668 13.5272 11.6015 13.0001 11 13.0001H4.135Z" fill="white"/>
+                </svg>
+                <span class="ms-1 d-none d-sm-inline">User Management</span> 
+              </a>
+            <ul class="collapse  nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                <li class="w-100">
+                  <a href="{{ url('users') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Manage</span> Useres </a>
+                </li>
+                <li>
+                    <a href="{{ url('roles') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Manage</span> Roles </a>
+                </li>
+            </ul>
+        </li>
+        @endif
+        @if (Auth::user()->hasRole('student'))
+<!--        <li>
+            <a href="{{route('student.assessment.test')}}" class="nav-link align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none" class="sidebar_svg">
+              <path d="M6.09025 13.2498C8.11547 8.90401 8.6447 0.960083 8.6447 0.960083L23 1.37972C22.9363 2.11256 20.6041 29.8471 13.679 15.4203L1 15.1273C1 15.1273 1.90692 19.3549 5.14137 19.4319C9.33791 19.5306 17.4683 19.5694 17.4683 19.5694" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5891 5.23291L18.9105 5.49092" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.051 8.54492L17.8945 8.78583" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.1846 11.8688L14.0905 12.0063" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="ms-1 d-none d-sm-inline">Assessment Test</span>
+            </a>
+        </li>-->
+        <li>
+            <a href="{{route('student.course.selection')}}" class="nav-link align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none" class="sidebar_svg">
+              <path d="M6.09025 13.2498C8.11547 8.90401 8.6447 0.960083 8.6447 0.960083L23 1.37972C22.9363 2.11256 20.6041 29.8471 13.679 15.4203L1 15.1273C1 15.1273 1.90692 19.3549 5.14137 19.4319C9.33791 19.5306 17.4683 19.5694 17.4683 19.5694" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5891 5.23291L18.9105 5.49092" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.051 8.54492L17.8945 8.78583" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.1846 11.8688L14.0905 12.0063" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="ms-1 d-none d-sm-inline">Course Enrollment</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{route('my.course')}}" class="nav-link align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none" class="sidebar_svg">
+              <path d="M6.09025 13.2498C8.11547 8.90401 8.6447 0.960083 8.6447 0.960083L23 1.37972C22.9363 2.11256 20.6041 29.8471 13.679 15.4203L1 15.1273C1 15.1273 1.90692 19.3549 5.14137 19.4319C9.33791 19.5306 17.4683 19.5694 17.4683 19.5694" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5891 5.23291L18.9105 5.49092" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.051 8.54492L17.8945 8.78583" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.1846 11.8688L14.0905 12.0063" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="ms-1 d-none d-sm-inline">My Courses</span>
+            </a>
+        </li>
+        @endif
+                @if (Auth::user()->hasRole('teacher'))
+         <li>
+            <a href="{{route('teacher.course')}}" class="nav-link align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none" class="sidebar_svg">
+              <path d="M6.09025 13.2498C8.11547 8.90401 8.6447 0.960083 8.6447 0.960083L23 1.37972C22.9363 2.11256 20.6041 29.8471 13.679 15.4203L1 15.1273C1 15.1273 1.90692 19.3549 5.14137 19.4319C9.33791 19.5306 17.4683 19.5694 17.4683 19.5694" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5891 5.23291L18.9105 5.49092" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.051 8.54492L17.8945 8.78583" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.1846 11.8688L14.0905 12.0063" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="ms-1 d-none d-sm-inline">Course List</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{route('teacher.student.list')}}" class="nav-link align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none" class="sidebar_svg">
+              <path d="M6.09025 13.2498C8.11547 8.90401 8.6447 0.960083 8.6447 0.960083L23 1.37972C22.9363 2.11256 20.6041 29.8471 13.679 15.4203L1 15.1273C1 15.1273 1.90692 19.3549 5.14137 19.4319C9.33791 19.5306 17.4683 19.5694 17.4683 19.5694" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5891 5.23291L18.9105 5.49092" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.051 8.54492L17.8945 8.78583" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.1846 11.8688L14.0905 12.0063" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="ms-1 d-none d-sm-inline">Students</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{route('teacher.profile')}}" class="nav-link align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none" class="sidebar_svg">
+              <path d="M6.09025 13.2498C8.11547 8.90401 8.6447 0.960083 8.6447 0.960083L23 1.37972C22.9363 2.11256 20.6041 29.8471 13.679 15.4203L1 15.1273C1 15.1273 1.90692 19.3549 5.14137 19.4319C9.33791 19.5306 17.4683 19.5694 17.4683 19.5694" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5891 5.23291L18.9105 5.49092" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.051 8.54492L17.8945 8.78583" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.1846 11.8688L14.0905 12.0063" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="ms-1 d-none d-sm-inline">My Profile</span>
+            </a>
+        </li>
+		
+        @endif
+        
+<!--        <li>
+            <a href="#"  class="nav-link align-middle ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 23 20" fill="none" class="sidebar_svg">
+                <path d="M11.6681 14.5547C10.3966 14.0637 8.98427 13.4528 8.86585 13.073V12.6737C9.15189 12.367 9.35642 11.9933 9.46079 11.5871C9.53288 11.5354 9.59363 11.4695 9.63927 11.3934C9.68492 11.3173 9.71448 11.2327 9.72618 11.1448C9.73788 11.0568 9.73148 10.9674 9.70732 10.8821C9.68316 10.7967 9.64174 10.7172 9.58568 10.6485V9.75602C9.58568 8.83399 9.07236 8.20293 7.89906 8.20293C7.68159 8.17085 7.45965 8.18776 7.24957 8.25246C7.03948 8.31717 6.84651 8.42801 6.68477 8.57688C6.52303 8.72575 6.39663 8.90889 6.31476 9.1129C6.2329 9.31691 6.19767 9.53665 6.21164 9.75602V10.6492C6.15555 10.7179 6.11414 10.7973 6.08992 10.8827C6.06571 10.968 6.05916 11.0574 6.0708 11.1453C6.08243 11.2333 6.11195 11.3179 6.15753 11.394C6.2031 11.4701 6.2638 11.5361 6.33583 11.5878C6.44073 11.994 6.64546 12.3676 6.93147 12.6745V13.0737C6.81306 13.4535 5.40078 14.0637 4.12927 14.5554C4.076 14.5763 4.0303 14.613 3.99821 14.6604C3.96612 14.7078 3.94913 14.7638 3.94947 14.8211V15.8182C3.94919 15.8552 3.95621 15.8919 3.9701 15.9261C3.98398 15.9604 4.00452 15.9916 4.03047 16.018C4.05642 16.0443 4.08729 16.0653 4.12134 16.0797C4.1554 16.0941 4.19198 16.1017 4.22896 16.102H11.5684C11.6053 16.1017 11.6419 16.0941 11.676 16.0797C11.71 16.0653 11.7409 16.0443 11.7669 16.018C11.7928 15.9916 11.8133 15.9604 11.8272 15.9261C11.8411 15.8919 11.8481 15.8552 11.8479 15.8182V14.8211C11.8483 14.7637 11.8314 14.7075 11.7993 14.66C11.7672 14.6124 11.7214 14.5757 11.6681 14.5547V14.5547Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.292 1.27438C13.2158 1.18829 13.1222 1.11932 13.0174 1.07203C12.9126 1.02474 12.799 1.00019 12.6841 1H10.2624C10.1473 1.00018 10.0336 1.02472 9.92867 1.07201C9.82376 1.1193 9.73002 1.18827 9.65367 1.27438C9.57746 1.36124 9.5203 1.4631 9.48586 1.57341C9.45141 1.68371 9.44045 1.80002 9.45369 1.91481L9.93748 6.01669C9.9603 6.21512 10.0552 6.39827 10.2041 6.53137C10.353 6.66447 10.5456 6.73826 10.7454 6.73872H12.2003C12.4001 6.73828 12.5928 6.66453 12.7419 6.53144C12.8909 6.39835 12.986 6.21518 13.0089 6.01669L13.492 1.91481C13.5055 1.8 13.4947 1.68365 13.4602 1.5733C13.4258 1.46295 13.3685 1.3611 13.292 1.27438V1.27438Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.292 1.27438C13.2158 1.18829 13.1222 1.11932 13.0174 1.07203C12.9126 1.02474 12.799 1.00019 12.6841 1H10.2624C10.1473 1.00018 10.0336 1.02472 9.92867 1.07201C9.82376 1.1193 9.73002 1.18827 9.65367 1.27438C9.57746 1.36124 9.5203 1.4631 9.48586 1.57341C9.45141 1.68371 9.44045 1.80002 9.45369 1.91481L9.93748 6.01669C9.9603 6.21512 10.0552 6.39827 10.2041 6.53137C10.353 6.66447 10.5456 6.73826 10.7454 6.73872H12.2003C12.4001 6.73828 12.5928 6.66453 12.7419 6.53144C12.8909 6.39835 12.986 6.21518 13.0089 6.01669L13.492 1.91481C13.5055 1.8 13.4947 1.68365 13.4602 1.5733C13.4258 1.46295 13.3685 1.3611 13.292 1.27438V1.27438Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13.1757 4.60083H21.939V19.0415H1V4.60083H9.76981" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14.0061 10.3771H19.0603" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14.0061 12.5432H19.0603" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>   
+              <span class="ms-1 d-none d-sm-inline">Renewal of old license</span>
+            </a>
+        </li>-->
+<!--        <li>
+          <a href="#"  class="nav-link align-middle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 23 20" fill="none" class="sidebar_svg">
+              <path d="M21.8513 5.52962H2.41479V3.74777C2.41479 3.25682 2.6099 2.78603 2.95706 2.43887C3.30422 2.09171 3.775 1.89661 4.26596 1.89661H20.9272C21.1727 1.89661 21.4081 1.99416 21.5816 2.16774C21.7552 2.34132 21.8528 2.57671 21.8528 2.82219L21.8513 5.52962Z" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.1024 7.66833C11.1024 7.66833 10.8264 9.37781 11.1024 9.86119" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.89062 7.66833H6.7649" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.73341 18.0585C5.73341 18.0585 5.44438 18.4256 5.19582 18.4256H1.45089C1.19366 18.4256 1.10125 18.2312 1.18073 18.0585" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4.26416 1.89668V1" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20.9253 1.89668V1" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3.19709 7.03027C3.19709 7.03027 3.71017 8.7384 3.26942 9.716C3.26942 9.716 1.01356 14.6922 1.00706 16.0889C0.9794 16.3125 1.0336 16.5384 1.15965 16.7252C1.28569 16.9119 1.47512 17.0468 1.69282 17.1048C1.78242 17.1142 6.5461 17.0628 6.5461 17.0628C5.99335 16.8995 6.52591 14.9594 7.07865 15.1234C6.52591 14.9594 7.05767 13.0195 7.61042 13.1835C7.05767 13.0195 7.58944 11.0802 8.14219 11.2435L9.27954 7.66832L19.713 7.55278V7.03027" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.9097 7.97412V9.85986C13.9134 10.048 13.8788 10.235 13.8081 10.4094C13.7373 10.5837 13.6319 10.7418 13.4982 10.8742C13.3645 11.0066 13.2052 11.1104 13.0301 11.1794C12.8551 11.2483 12.6678 11.2809 12.4798 11.2753L8.13867 11.2436" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="ms-1 d-none d-sm-inline">Registeration of Weapon license</span> 
+          </a>
+        </li>-->
+        <li>
+          <a href="{{ route('logout') }}" class="nav-link align-middle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" viewBox="0 0 20 22" fill="none" class="sidebar_svg logout_svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M8 20C8.55229 20 9 20.4477 9 21C9 21.5523 8.55229 22 8 22H3C1.34315 22 0 20.6569 0 19V3C0 1.34315 1.34315 0 3 0H8C8.55229 0 9 0.447715 9 1C9 1.55228 8.55229 2 8 2H3C2.44772 2 2 2.44772 2 3V19C2 19.5523 2.44772 20 3 20H8ZM16.5858 10L14.2929 7.70711C13.9024 7.31658 13.9024 6.68342 14.2929 6.29289C14.6834 5.90237 15.3166 5.90237 15.7071 6.29289L19.7071 10.2929C19.8902 10.476 19.9874 10.7123 19.9989 10.952C19.9996 10.968 20 10.984 20 11M16.5858 12H7C6.44772 12 6 11.5523 6 11C6 10.4477 6.44772 10 7 10H16.5858M16.5858 12L14.2929 14.2929C13.9024 14.6834 13.9024 15.3166 14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071L19.7071 11.7071C19.9 11.5142 19.9976 11.2621 20 11.0092" fill="white"/>
+            </svg> 
+            <span class="ms-1 d-none d-sm-inline">Logout</span> </a>
+        </li>
+    </ul>
+</nav>

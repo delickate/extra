@@ -1,0 +1,144 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+// body {
+//     min-width: 992px !important;
+// }
+
+// .container {
+//     min-width: 992px !important;
+// }
+
+// .navbar {
+//     display: none;
+// }
+
+// .badge {
+//     border: 1px solid #000;
+// }
+
+// .table {
+//     border-collapse: collapse !important;
+// }
+
+// .table td,
+// .table th {
+//     background-color: #fff !important;
+// }
+
+// .table-bordered th,
+// .table-bordered td {
+//     border: 1px solid #dee2e6 !important;
+// }
+
+// .table-dark {
+//     color: inherit;
+// }
+
+// .table-dark th,
+// .table-dark td,
+// .table-dark thead th,
+// .table-dark tbody + tbody {
+//     border-color: #dee2e6;
+// }
+
+// .table .thead-dark th {
+//     color: inherit;
+//     border-color: #dee2e6;
+// }
+
+.bor-rad-20 {
+    border-radius: 20px;
+}
+
+.logo-area {
+    margin-bottom: 25px;
+}
+
+.login-logo {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.login-text {
+    width: 70%;
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
+    display: block;
+    margin: 0 auto;
+    line-height: 15px;
+    margin-bottom: 25px;
+}
+
+.login-field {
+    border-radius: 25px;
+    border-color: #3d5c9f;
+    color: #3d5c9f;
+}
+
+.mt-65 {
+    margin-top: 65px;
+}
+
+.forgot-pass-txt {
+    text-align: center;
+    width: 76%;
+    display: block;
+    margin: 0 auto;
+    color: #3d5c9f;
+}
+
+.login-btn {
+    background-color: #3d5c9f;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.menu-styling {
+    background: #1f7a4f;
+    border-radius: 9px;
+    color: #ffffff !important;
+    padding: 5px 16px !important;
+    margin: 0 10px 0 0;
+}
+
+.menu-styling:hover {
+    background: #2d3091;
+}
+
+.menu-styling-active {
+    background: #2d3091;
+    border-radius: 9px;
+    color: #ffffff !important;
+    padding: 5px 16px !important;
+    margin: 0 10px 0 0;
+}
+
+.listing-tbl thead tr th {
+    background-color: #006837;
+    font-size: 13px;
+    color: #ffffff;
+    text-align: center;
+    padding: 4px 10px;
+}
+
+.listing-tbl tbody tr td {
+    color: #888888;
+    padding: 6px 10px;
+    font-weight: 600;
+}
+
+.data-center {
+    text-align: center;
+}
