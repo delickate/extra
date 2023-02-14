@@ -40,6 +40,8 @@
                         </td>
 						 <td class="text-center">
                             <a href="{{ route('topic.additem', ['topic_id' => $topic->topic_id]) }}" > Add Questions </a>
+                            |
+                            <a href="{{ route('topic.listitem', ['topic_id' => $topic->topic_id]) }}" > list Questions </a>
                         </td>   
                     @endforeach
 

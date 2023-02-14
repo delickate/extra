@@ -35,7 +35,24 @@
         <form method="POST" action="{{ route('topic.saveitem')}}">
             @csrf
 			<input type="hidden" name="topic_id" value="{{ $topic_id }}">
+
 			 <div class="input-style">
+				 <div class="row" style="padding: 10px;">
+					<div class="col-lg-6 col-md-6">
+						<label class="activities_label" style="margin-bottom:10px">{{ __('Activities') }}</label>
+						{{ Form::select('activity_id', $activities, null, ['class' => "form-control"]) }}
+
+
+
+						@error('activity_id')
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $message }}</strong>
+							</span>
+						@enderror
+					</div>
+				</div>
+			</div>
+			<div class="input-style">
 				 <div class="row" style="padding: 10px;">
 					<div class="col-lg-6 col-md-6">
 						<label class="email_label" style="margin-bottom:10px">{{ __('Question') }}</label>

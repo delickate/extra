@@ -68,7 +68,10 @@ use Spatie\QueryBuilder\QueryBuilder;
                   Route::get('/topic/activities/{topic_id}', 'TopicController@topicActivitiesList')->name('topic.activities');
 				  Route::get('/topic/addtopic/{course_id}', 'TopicController@topicAddTopic')->name('topic.addtopic');
 				  Route::post('/topic/savetopic/{course_id}', 'TopicController@topicSaveTopic')->name('topic.savetopic');
+
                   Route::get('/topic/additem/{topic_id}', 'TopicController@topicAddItem')->name('topic.additem');
+                  Route::get('/topic/listitem/{topic_id}', 'TopicController@topicListItem')->name('topic.listitem');
+
 				  Route::post('/topic/saveitem/', 'TopicController@topicSaveItem')->name('topic.saveitem');
 				  Route::get('/activity/{activity_id}', 'TopicController@topicActivityDetails')->name('topic.activity');
                   Route::get('/studentactivities/{topic_id}', 'TopicController@topicStudentActivityDetails')->name('topic.studentactivities');

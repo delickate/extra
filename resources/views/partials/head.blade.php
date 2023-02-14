@@ -50,6 +50,12 @@
 
 <script src="https://cdn.tiny.cloud/1/e03z2i9rgydpo612und3ghwo9xmh4wdeb3t1ivbp6nyxjgs6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+
+
+
 <script type="text/javascript">
       var base_url = {!! json_encode(url('/')) !!}
 </script>

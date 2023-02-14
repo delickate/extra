@@ -150,27 +150,49 @@ exit;*/
 	CourseTopics::create($input);
 	return redirect()->route('topic.addtopic', $course_id)->with('success', 'Topic added successfully');
  }
- public function topicAdditem($topic_id){
-	return view('topics.add_items', compact('topic_id'));
+ public function topicAdditem($topic_id)
+ {
+    $activities = CourseTopicActivities::pluck("activity_name", "activity_id")->toArray();
+	return view('topics.add_items', compact('topic_id', 'activities'));
  }
  
- public function topicSaveItem(Request $request){
-	$post = $request->all();
-	$user_id = Auth::user()->user_id;
-	$topic_id = $post['topic_id'];
-	$course_id = CourseTopics::select('course_idFK')->where('topic_id',$topic_id)->get();	
-	$input['question_text'] = $post['question'];
-	$input['answer_1'] = $post['option1'];
-	$input['answer_2'] = $post['option2'];
-	$input['answer_3'] = $post['option3'];
-	$input['answer_4'] = $post['option4'];
-	$input['correct'] = $post['correctoption'];
-	$input['type_of_assessment'] = $post['assessmenttype'];
-	$input['topic_idFK'] = $post['topic_id'];
-	$input['course_idFK'] = $course_id[0]->course_idFK;
-	$input['created_by'] = $user_id;
-	$input['created_at'] = Carbon::now()->toDateTimeString();
+ public function topicSaveItem(Request $request)
+ {
+	$post                      = $request->all();
+	$user_id                   = Auth::user()->user_id;
+	$topic_id                  = $post['topic_id'];
+	$course_id                 = CourseTopics::select('course_idFK')->where('topic_id',$topic_id)->get();	
+	$input['question_text']    = $post['question'];
+	$input['answer_1']         = $post['option1'];
+	$input['answer_2']         = $post['option2'];
+	$input['answer_3']         = $post['option3'];
+	$input['answer_4']         = $post['option4'];
+	$input['correct']          = $post['correctoption'];
+	$input['type_of_assessment']   = $post['assessmenttype'];
+	$input['topic_idFK']           = $post['topic_id'];
+	$input['course_idFK']          = $course_id[0]->course_idFK;
+	$input['created_by']           = $user_id;
+	$input['created_at']           = Carbon::now()->toDateTimeString();
+    $input['activity_idFK']        = $post['activity_id'];
+
 	AssessmentTest::create($input);
+
 	return redirect()->route('topic.additem', $topic_id)->with('success', 'Question added successfully');
  }
+
+ public function topicListItem($topic_id)
+ {
+    $questions = CourseTopicActivities::where(["topic_idFK" => $topic_id])->get();
+    
+    //$query = CourseTopicActivities::where(["topic_idFK" => $topic_id]);
+    // echo "<pre>";
+    // print_r($query->toSql());
+    // print_r($query->getBindings());
+    // die();
+
+    //echo $questions; die();
+    return view('topics.view_questions', compact('topic_id', 'questions'));
+ }
+ 
+
 }
