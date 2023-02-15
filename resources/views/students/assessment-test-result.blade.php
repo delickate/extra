@@ -48,6 +48,10 @@
               <span class="d-block text-sm">level </span>
             </div>
             <div class="col-4 text-center">
+              <?php 
+//echo "<pre>"; print_r($result); die();
+              //dd($result);
+              ?>
                @if($result->type_of_assessment == 'post' && $result->scour < 33)
                <a href="{{ route('topic.activity', ['topic_id' => $result->topic_idFK]) }}" style="margin-top: 10px" class="h4 font-bolder mb-0 btn btn-success">Re-start Activity</a>
                 @elseif($result->type_of_assessment == 'pre')

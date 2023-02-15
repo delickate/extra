@@ -74,12 +74,14 @@ class StudentController extends Controller
         return view( 'students.dashboard',compact('total_count') );
     }
      public function studentTest($type , $topic_id)
-    {                   
+    {                  
         $query = AssessmentTest::select('*')->where('topic_idFK',$topic_id)->where('type_of_assessment',$type);
         $test = $query->paginate(50);
         $question_counts = count($test); 
         return view( 'students.assessment-test',compact('test' , 'question_counts' , 'type' , 'topic_id') );
     }  
+
+
      public function studentTestResult($test_result_id)
     { 
 
@@ -105,7 +107,7 @@ class StudentController extends Controller
         $query = AssessmentTest::select('*');
         $test = $query->paginate(50);
         $question_counts = count($test);
-        
+
         return view( 'students.assessment-test',compact('test' , 'question_counts') );
     }
     public function assessmentSave(Request $request)
@@ -126,12 +128,29 @@ class StudentController extends Controller
            $obtain_marks = 0;
            
          
-           foreach ($questions as $key => $value) {
+           foreach ($questions as $key => $value) 
+           {
                
               $selected_answer =  $input[$value['question_id']];
-              if($selected_answer == $value['correct']){
+
+              $weightage = AssessmentTest::select('weightage')->where('question_id', $value['question_id'])->first();
+
+              $curren_weightage = $weightage->weightage;
+
+              $updated_weightage = $curren_weightage;
+
+              //if answer is corrected
+              if($selected_answer == $value['correct'])
+              {
+                    $updated_weightage = $updated_weightage+0.5;
+
                     $obtain_marks++;
-              }
+              }else{
+                        //if answer if false
+                        $updated_weightage = $updated_weightage-0.5;
+                   }
+
+                  AssessmentTest::where('question_id', $value['question_id'])->update(['weightage' => $updated_weightage]); 
                
            }
      
@@ -153,6 +172,8 @@ class StudentController extends Controller
                 $objIns->created_by = $user_id;
            
        // RegisteredStudents::where('user_idFK', $user_id)->update(['course_level' => $student_lavel]);
+
+                //echo "<pre>"; print_r($objIns); die(); 
         if($objIns->save()){
             return redirect()->route('course.topics.result', ['test_result_id' =>$objIns->test_result_id])->with('success','Test successfully complete.');  
         }                        

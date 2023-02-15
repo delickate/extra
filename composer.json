@@ -30,6 +30,7 @@
         "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.9.1",
+        "kitloong/laravel-migrations-generator": "^6.8",
         "laravel/ui": "^1.0",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",

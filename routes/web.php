@@ -60,14 +60,20 @@ use Spatie\QueryBuilder\QueryBuilder;
               {
                    Route::get('/student/index', 'StudentController@index')->name('student.index');
                    Route::get('/student/assessment/test', 'StudentController@assessmentTest')->name('student.assessment.test');
-                   Route::post('/save/assessment', 'StudentController@assessmentSave')->name('save.assessment');
                    
                   Route::get('/student/course/selection', 'StudentController@courseSelection')->name('student.course.selection');
                   Route::get('/student/course/enrollment/{course_id}', 'StudentController@courseEnrollment')->name('student.course.enrollment');
+                  
+
                   Route::get('/my/course', 'StudentController@myCourse')->name('my.course');
+
                  
                   Route::get('/course/studenttopics/{course_id}', 'TopicController@studentTopics')->name('course.studenttopics');
                   Route::get('/course/topics/{course_id}', 'TopicController@index')->name('course.topics');
+                  #pre test
+                  Route::get('/course/topics/test/{type}/{topic_id}', 'StudentController@studentTest')->name('course.topics.test');
+                  Route::get('/course/topics/result/{test_result_id}', 'StudentController@studentTestResult')->name('course.topics.result');
+                  
                   Route::get('/topic/activities/{topic_id}', 'TopicController@topicActivitiesList')->name('topic.activities');
 				          Route::get('/topic/addtopic/{course_id}', 'TopicController@topicAddTopic')->name('topic.addtopic');
 				          Route::post('/topic/savetopic/{course_id}', 'TopicController@topicSaveTopic')->name('topic.savetopic');
@@ -76,12 +82,15 @@ use Spatie\QueryBuilder\QueryBuilder;
                   Route::get('/topic/listitem/{topic_id}', 'TopicController@topicListItem')->name('topic.listitem');
 
 				          Route::post('/topic/saveitem/', 'TopicController@topicSaveItem')->name('topic.saveitem');
-				          Route::get('/activity/{activity_id}', 'TopicController@topicActivityDetails')->name('topic.activity');
-                  Route::get('/studentactivities/{topic_id}', 'TopicController@topicStudentActivityDetails')->name('topic.studentactivities');
+				          
+                  Route::get('/activity/{topic_id}', 'TopicController@topicActivityDetails')->name('topic.activity');
                   
-                  #pre test
-                  Route::get('/course/topics/test/{type}/{topic_id}', 'StudentController@studentTest')->name('course.topics.test');
-                  Route::get('/course/topics/result/{test_result_id}', 'StudentController@studentTestResult')->name('course.topics.result');
+                  Route::get('/studentactivities/{topic_id}', 'TopicController@topicStudentActivityDetails')->name('topic.studentactivities');
+
+                  Route::post('/save/assessment', 'StudentController@assessmentSave')->name('save.assessment');
+                   
+                  
+                  
           });
 
 

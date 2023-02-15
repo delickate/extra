@@ -13,6 +13,11 @@ class AssessmentTest extends Model
     
     protected $guarded = [];
 
+    protected $fillable = [
+        'weightage',
+    ];
+
+
     function notifications(){
 //        return $this->hasMany('App\Notification', 'user_idFk', 'student_id');
     }
