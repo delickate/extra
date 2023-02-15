@@ -76,7 +76,7 @@ class StudentController extends Controller
     }
      public function studentTest($type , $topic_id)
     {                  
-        $query = AssessmentTest::select('*')->where('topic_idFK',$topic_id)->where('type_of_assessment',$type);
+        $query = AssessmentTest::select('*')->where('topic_idFK',$topic_id)->where('type_of_assessment',$type)->orderBy(DB::raw('RAND()'));
         $test = $query->paginate(50);
         $question_counts = count($test); 
         return view( 'students.assessment-test',compact('test' , 'question_counts' , 'type' , 'topic_id') );
