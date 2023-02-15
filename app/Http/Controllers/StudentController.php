@@ -105,6 +105,7 @@ class StudentController extends Controller
         $query = AssessmentTest::select('*');
         $test = $query->paginate(50);
         $question_counts = count($test);
+        
         return view( 'students.assessment-test',compact('test' , 'question_counts') );
     }
     public function assessmentSave(Request $request)

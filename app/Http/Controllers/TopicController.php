@@ -55,7 +55,7 @@ class TopicController extends Controller
                     $query->where('student_test_result.is_latest', 1)
                         ->orWhereNull('student_test_result.is_latest');
                 })->get();
-                
+              
 //echo "<pre>";
 //print_r($topics);
 //echo"</pre>";
@@ -174,6 +174,9 @@ exit;*/
 	$input['created_by']           = $user_id;
 	$input['created_at']           = Carbon::now()->toDateTimeString();
     $input['activity_idFK']        = $post['activity_id'];
+    $input['weightage']            = $post['contentlevelValue'];
+    $input['levels']               = $post['contentlevel'];
+    
 
 	AssessmentTest::create($input);
 

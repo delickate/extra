@@ -52,6 +52,41 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="input-style">
+					<div class="row" style="padding: 10px;">
+						<div class="col-lg-6 col-md-6">
+							<label class="email_label" style="margin-bottom:10px">{{ __('Select Content Level') }}</label>
+							<Select name="contentlevel" id="contentlevel" class="form-control @error('contentlevel') is-invalid @enderror" value="{{ old('contentlevel') }}" required autocomplete="contentlevel" autofocus>
+								<option value="Easy" selected>Easy</option>
+								<option value="Medium">Medium</option>
+								<option value="Hard">Hard</option>
+								<option value="Expert">Expert</option>
+							</select>
+							@error('contentlevel')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+						</div>
+					</div>
+				</div>
+
+				<div class="input-style">
+					<div class="row" style="padding: 10px;">
+						<div class="col-lg-6 col-md-6">
+							<label class="email_label" style="margin-bottom:10px">{{ __('Content Level Value') }}</label>
+							<input type="text" name="contentlevelValue" id="contentlevelValue" class="form-control @error('contentlevelValue') is-invalid @enderror" value="{{ old('contentlevelValue') }}" required onblur="validateValue(this)" />
+								
+							@error('contentlevelValue')
+								<span class="invalid-feedback" role="alert">
+									<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+						</div>
+					</div>
+				</div>
+
 			<div class="input-style">
 				 <div class="row" style="padding: 10px;">
 					<div class="col-lg-6 col-md-6">
@@ -192,6 +227,37 @@ document.getElementById('taxonomy').addEventListener("change", function (e) {
         document.getElementById('bloom-id').style.display = 'block'
     }
 });
+
+function validateValue(myVal)
+{
+	//Set range on bases of level
+	let min_value = 0;
+	let max_value = 100;
+	//Get selected level
+	const level_mode = $("#contentlevel").val();
+	//Get inserted weightage
+	const weightage = $(myVal).val();
+    //specify the lavel range
+	switch(level_mode)
+	{
+		case 'Easy':  min_value=1;  max_value=25;break;
+		case 'Medium':min_value=26; max_value=50;break;
+		case 'Hard':  min_value=51; max_value=75;break;	
+		case 'Expert':min_value=76; max_value=100;break;	
+	}
+	//Check if inserted weightage is between range
+	if(weightage >= min_value && weightage <= max_value )
+	{
+		//all good. 
+	}else{
+            //insert weightage again.
+		    $(this).val('');
+		    $(this).focus();
+		    alert("Conent level value "+weightage+" should be between "+min_value+" - "+max_value);
+	     }
+}
+
+
 </script>
 
 @endsection

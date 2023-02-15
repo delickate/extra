@@ -36,25 +36,28 @@ use Spatie\QueryBuilder\QueryBuilder;
  
   # with auth teachers
   Route::group([
-            'prefix' => 'teachers',
-            'middleware' => 'auth'
-      ], function() {
-          Route::get('/teacher/index', 'TeacherController@index')->name('teacher.index'); 
-          Route::get('/teacher/student/list', 'TeacherController@studentList')->name('teacher.student.list'); 
-          
-           Route::get('/teacher/course', 'TeacherController@teacherCoursesList')->name('teacher.course');
-           Route::get('/teacher/profile', 'TeacherController@teacherProfile')->name('teacher.profile');
-		   Route::get('/teacher/addcontent/{topic_id}', 'TeacherController@teacherAddContent')->name('teacher.addcontent');
-		   Route::post('/teacher/savecontent/', 'TeacherController@teacherSaveContent')->name('teacher.savecontent');
-           Route::post('/teacher/update/{id}', 'TeacherController@teacherProfileUpdate')->name('teacher.updates');
-		   Route::get('/teacher/createcourse', 'TeacherController@teacherCreateCourse')->name('teacher.createcourse');
-		   Route::post('/teacher/addcourse', 'TeacherController@teacherAddCourse')->name('teacher.addcourse');
-    });
+                    'prefix' => 'teachers',
+                    'middleware' => 'auth'
+              ], function() 
+              {
+                  Route::get('/teacher/index', 'TeacherController@index')->name('teacher.index'); 
+                  Route::get('/teacher/student/list', 'TeacherController@studentList')->name('teacher.student.list'); 
+                  
+                  Route::get('/teacher/course', 'TeacherController@teacherCoursesList')->name('teacher.course');
+                  Route::get('/teacher/profile', 'TeacherController@teacherProfile')->name('teacher.profile');
+        		      Route::get('/teacher/addcontent/{topic_id}', 'TeacherController@teacherAddContent')->name('teacher.addcontent');
+        		      Route::post('/teacher/savecontent/', 'TeacherController@teacherSaveContent')->name('teacher.savecontent');
+                  Route::post('/teacher/update/{id}', 'TeacherController@teacherProfileUpdate')->name('teacher.updates');
+        		      Route::get('/teacher/createcourse', 'TeacherController@teacherCreateCourse')->name('teacher.createcourse');
+        		      Route::post('/teacher/addcourse', 'TeacherController@teacherAddCourse')->name('teacher.addcourse');
+            });
+
   # with auth Students
   Route::group([
-            'prefix' => 'student',
-            'middleware' => 'auth'
-      ], function() {
+                    'prefix' => 'student',
+                    'middleware' => 'auth'
+              ], function() 
+              {
                    Route::get('/student/index', 'StudentController@index')->name('student.index');
                    Route::get('/student/assessment/test', 'StudentController@assessmentTest')->name('student.assessment.test');
                    Route::post('/save/assessment', 'StudentController@assessmentSave')->name('save.assessment');
@@ -66,20 +69,20 @@ use Spatie\QueryBuilder\QueryBuilder;
                   Route::get('/course/studenttopics/{course_id}', 'TopicController@studentTopics')->name('course.studenttopics');
                   Route::get('/course/topics/{course_id}', 'TopicController@index')->name('course.topics');
                   Route::get('/topic/activities/{topic_id}', 'TopicController@topicActivitiesList')->name('topic.activities');
-				  Route::get('/topic/addtopic/{course_id}', 'TopicController@topicAddTopic')->name('topic.addtopic');
-				  Route::post('/topic/savetopic/{course_id}', 'TopicController@topicSaveTopic')->name('topic.savetopic');
+				          Route::get('/topic/addtopic/{course_id}', 'TopicController@topicAddTopic')->name('topic.addtopic');
+				          Route::post('/topic/savetopic/{course_id}', 'TopicController@topicSaveTopic')->name('topic.savetopic');
 
                   Route::get('/topic/additem/{topic_id}', 'TopicController@topicAddItem')->name('topic.additem');
                   Route::get('/topic/listitem/{topic_id}', 'TopicController@topicListItem')->name('topic.listitem');
 
-				  Route::post('/topic/saveitem/', 'TopicController@topicSaveItem')->name('topic.saveitem');
-				  Route::get('/activity/{activity_id}', 'TopicController@topicActivityDetails')->name('topic.activity');
+				          Route::post('/topic/saveitem/', 'TopicController@topicSaveItem')->name('topic.saveitem');
+				          Route::get('/activity/{activity_id}', 'TopicController@topicActivityDetails')->name('topic.activity');
                   Route::get('/studentactivities/{topic_id}', 'TopicController@topicStudentActivityDetails')->name('topic.studentactivities');
                   
                   #pre test
-                   Route::get('/course/topics/test/{type}/{topic_id}', 'StudentController@studentTest')->name('course.topics.test');
-                   Route::get('/course/topics/result/{test_result_id}', 'StudentController@studentTestResult')->name('course.topics.result');
-    });
+                  Route::get('/course/topics/test/{type}/{topic_id}', 'StudentController@studentTest')->name('course.topics.test');
+                  Route::get('/course/topics/result/{test_result_id}', 'StudentController@studentTestResult')->name('course.topics.result');
+          });
 
 
 Route::get('/', function () {
