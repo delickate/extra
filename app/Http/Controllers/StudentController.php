@@ -18,6 +18,7 @@ use App\RegisteredStudents;
 use App\StudentTestResult;
 use App\Courses;
 use App\StudentCourses;
+use App\QuestionsAnswers;
 use PDF;
 
 class StudentController extends Controller
@@ -133,16 +134,21 @@ class StudentController extends Controller
                
               $selected_answer =  $input[$value['question_id']];
 
-              $weightage = AssessmentTest::select('weightage')->where('question_id', $value['question_id'])->first();
+              $weightage = AssessmentTest::select('*')->where('question_id', $value['question_id'])->first();
+
+              $course_id   = $weightage->course_idFK;
+              $activity_id = $weightage->activity_idFK;
 
               $curren_weightage = $weightage->weightage;
 
               $updated_weightage = $curren_weightage;
 
+              $is_answer_correct = 0;
               //if answer is corrected
               if($selected_answer == $value['correct'])
               {
                     $updated_weightage = $updated_weightage+0.5;
+                    $is_answer_correct = 1;
 
                     $obtain_marks++;
               }else{
@@ -151,6 +157,18 @@ class StudentController extends Controller
                    }
 
                   AssessmentTest::where('question_id', $value['question_id'])->update(['weightage' => $updated_weightage]); 
+
+
+                  #loging questions & their anwsers
+                  $qna = new QuestionsAnswers;
+                  $qna->qna_student_idfk        = $user_id;
+                  $qna->qna_course_idfk         = $course_id;
+                  $qna->qna_topic_idfk          = $topic_id;
+                  $qna->qna_activity_idfk       = $activity_id;
+                  $qna->qna_questions_idfk      = $value['question_id'];
+                  $qna->qna_is_answer_correct   = $is_answer_correct;
+
+                  $qna->save();
                
            }
      
@@ -161,6 +179,8 @@ class StudentController extends Controller
            #update previous test as archive
                 StudentTestResult::where('user_idFK', $user_id)->where('topic_idFK', $topic_id)->update(['is_latest' => '0']);
                 
+
+
            #save new test result     
                 $objIns = new StudentTestResult;
                 $objIns->user_idFK = $user_id;
