@@ -37,7 +37,7 @@
                         <td>{{ $topic->activity_name }}</td> 
                         <td>{{ ucfirst($topic->activity_type) }}</td> 
                         <td class="text-center">
-                          <a href="{{ route('topic.activity', ['activity_id' => $topic->activity_id]) }}" > Activity Details </a>  
+                          <a href="{{ route('topic.activity', ['topic_id' => $topic->activity_id]) }}" > Activity Details </a>  
                         </td> 
                      </tr>   
                             @endforeach

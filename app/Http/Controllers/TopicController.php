@@ -70,24 +70,21 @@ class TopicController extends Controller
 	public function studentTopics($course_id){
 		 DB::enableQueryLog();
 
-        $user_id = Auth::user()->user_id;
+        $user_id = Auth::user()->user_id; 
        $topics = CourseTopics::
                  
-               leftJoin('student_test_result', 'student_test_result.topic_idFK', '=', 'course_topics.topic_id')
-             //  ->Join('course_levels', 'course_levels.level_id', '=', 'course_topics.topic_level_id')
-              // ->Join('course_levels', 'course_levels.level_id', '=', 'course_topics.topic_level_id')
-               ->join("course_levels",function($join){
-                    $join->on("course_levels.level_id","=","course_topics.topic_level_id");
-                     //   ->on("course_topics.topic_level_id","<=","student_test_result.level_id");
-                })
-               
+               Join('student_courses', 'student_courses.course_idFK', '=', 'course_topics.course_idFK')
+               ->Join('users', 'users.user_id', '=', 'student_courses.student_idFK')
                ->where('course_topics.course_idFK',$course_id)
+               ->where('users.user_level', Auth::user()->user_level)
+               ->where('course_topics.topic_level_id',Auth::user()->user_level)
                //->where('course_topics.topic_level_id', '=','student_test_result.level_id')
-               ->where(function ($query) {
-                    $query->where('student_test_result.is_latest', 1)
-                        ->orWhereNull('student_test_result.is_latest');
-                           // ->Where('course_topics.topic_level_id', '=','student_test_result.level_id');
-                })->get();
+               // ->where(function ($query) 
+               //         {
+               //              $query->where('student_test_result.is_latest', 1)
+               //                    ->orWhereNull('student_test_result.is_latest');
+               //          })
+               ->get();
                 
 /*echo "<pre>";
 print_r($topics);
@@ -103,7 +100,8 @@ exit;*/
     { 
        $user_id = Auth::user()->user_id;
 //       $activities = CourseTopicActivities::where('topic_idFK',$topic_id)->get();
-       $activities = CourseTopicActivities::where('topic_idFK',$topic_id)->paginate(3);
+       $activities = CourseTopicActivities::where('topic_idFK',$topic_id)->paginate(30);
+      // dd($activities);
         return view( 'topics.topic_activities_list',compact('activities', 'topic_id' ) );
     }
     public function topicActivityDetails($topic_id)

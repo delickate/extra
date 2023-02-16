@@ -18,6 +18,7 @@ use App\Subjects;
 use App\User;
 use App\RegisteredTeachers;
 use App\CourseTopicActivities;
+use App\StudentCourses;
 //use PDF;
 use App\RegisteredStudents; 
 
@@ -91,6 +92,76 @@ class TeacherController extends Controller
         //  $total_count = 0;
         return view( 'teachers.student-list',compact('students') );
     }
+
+    public function teacherAddStudent()
+    {   
+        $courses = Courses::all();
+        return view('teachers.addstudent', compact('courses'));
+    }
+
+    public function teacherSaveStudent(Request $request)
+    {
+        $level = 1;
+        $post = $request->all();
+
+        $user_id = Auth::user()->user_id;
+
+        switch($post['contentlevel'])
+        {
+            case 'Easy':   $level = 1;break;
+            case 'Medium': $level = 2;break;
+            case 'Hard':   $level = 3;break; 
+            case 'Expert': $level = 4;break;    
+        }
+
+        
+        $input['name']                  = $post['student_name'];
+        $input['father_name']           = $post['father_name'];
+        $input['email']                 = $input['name'].'@gmail.com'; 
+        $input['username']              = $input['email'];
+        $input['password']              = '$2y$10$lWvIRhxKfitK7JrYKE.wHu6caPpbndTA/XgUUTj.3OQ1/sxH0euEy'; 
+        $input['pass_hint']            = 'student';
+        $input['user_level']            = $level;
+        $input['user_weightage']       = $post['contentlevelValue'];
+        $input['role_idFk']             = 3;
+        $input['district_id']           = 39;
+        //$input['created_by']            = $user_id;
+        
+        $input['created_at'] = Carbon::now()->toDateTimeString();
+        
+        $user_id = User::create($input); #saving student
+
+        $lastId = DB::getPdo()->lastInsertId();
+
+       // $register_user["user_idFK"] = $user_id->value('user_id');
+         $register_user["user_idFK"] = $lastId;
+         $register_user["is_active"] = 1;
+         $register_user["course_level"] = $input['user_level']; 
+         RegisteredStudents::create($register_user); # registering student
+        
+        $model_role["model_type"] = 'App\User'; 
+        $model_role["model_id"]   = $register_user["user_idFK"]; 
+        $model_role["role_id"]    = 3; 
+        DB::table('model_has_roles')->insert($model_role);
+//print_r($post['course']); die();
+        #assigning course
+        if(isset($post['course']))
+        {
+            $course = $post['course'];
+
+            foreach($course as $crs)
+            {
+                $student_course["student_idFK"] = $register_user["user_idFK"];
+                $student_course["course_idFK"]  = $crs;
+                StudentCourses::create($student_course);
+            }
+
+
+        }
+
+
+        return redirect()->route('teacher.student.list')->with('success', 'Student added successfully');
+    }
     
     public function teacherCoursesList()
     { 
@@ -140,6 +211,8 @@ class TeacherController extends Controller
         $user->update($input);      
         return redirect()->route('teacher.profile')->with('success', 'Profile updated successfully');
     }
+
+
     
 	public function teacherAddContent($topic_id){
 		return view('teachers.atool', compact('topic_id'));

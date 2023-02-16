@@ -50,6 +50,10 @@ use Spatie\QueryBuilder\QueryBuilder;
                   Route::post('/teacher/update/{id}', 'TeacherController@teacherProfileUpdate')->name('teacher.updates');
         		      Route::get('/teacher/createcourse', 'TeacherController@teacherCreateCourse')->name('teacher.createcourse');
         		      Route::post('/teacher/addcourse', 'TeacherController@teacherAddCourse')->name('teacher.addcourse');
+
+
+                   Route::get('addstudent', 'TeacherController@teacherAddStudent')->name('addstudent');
+                   Route::post('savestudent', 'TeacherController@teacherSaveStudent')->name('savestudent');
             });
 
   # with auth Students

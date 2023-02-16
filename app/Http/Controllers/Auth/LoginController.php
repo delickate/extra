@@ -28,7 +28,7 @@ class LoginController extends Controller
     {
         $role = $user->getRoleNames()->toArray();
         
-        //dd($role);
+        //dd($user);
         if ( $role[0] ) {// do your magic here
             switch ($role[0]) {
                 case 'super-admin':                    

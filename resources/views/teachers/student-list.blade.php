@@ -13,7 +13,7 @@
 
     <div class="card">
 
-        
+        <p align="right"><a href="{{ url('teachers/addstudent') }}" class="btn btn-primary">Add student</a></p>
         <div class="table-responsive">
 
             <table class="table table-stripped table-hover primary-table mb-0">
