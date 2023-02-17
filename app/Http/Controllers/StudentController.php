@@ -175,6 +175,24 @@ class StudentController extends Controller
            $obtain_percentage = round($obtain_marks/$input['question_counts']*100 , 2);
            $student_lavel = evaluateStudentlevel($obtain_percentage );
            
+           #/////////////////////////////if pass move to next level
+           $level = CourseTopicActivities::select('*')->where('activity_id', $activity_id)->first();
+           
+           $activity_weightage = $level->content_level_value;
+           $new_level          = "Easy";
+           $new_weightage      = "";
+
+           if($student_lavel > 1)
+           {
+                $activity_weightage = $activity_weightage+0.5;
+                $new_level          = get_level($activity_weightage);
+                
+           }else{
+                    $activity_weightage = $activity_weightage-0.5;
+                    $new_level          = get_level($activity_weightage);
+                }  
+
+           CourseTopicActivities::where('activity_id', $activity_id)->update(['content_level_value' => $activity_weightage, 'content_level' => $new_level]);      
            
            #update previous test as archive
                 StudentTestResult::where('user_idFK', $user_id)->where('topic_idFK', $topic_id)->update(['is_latest' => '0']);
@@ -198,6 +216,28 @@ class StudentController extends Controller
             return redirect()->route('course.topics.result', ['test_result_id' =>$objIns->test_result_id])->with('success','Test successfully complete.');  
         }                        
         return redirect()->route('student.index')->with('error','Please Tray again.');  
+    }
+
+
+    function get_level($weightage)
+    {
+        $level = 'Easy';
+
+        if($weightage>=1 && $weightage<=25)
+        {
+            $level = 'Easy';
+        }elseif($weightage>=26 && $weightage<=50)
+                {
+                    $level = 'Medium';
+                }elseif($weightage>=51 && $weightage<=75)
+                        {
+                            $level = 'Hard';
+                        }elseif($weightage>=76 && $weightage<=100)
+                                {
+                                    $level = 'Expert';
+                                }
+
+        return $level;
     }
     
        public function courseSelection()
