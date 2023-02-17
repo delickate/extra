@@ -17,6 +17,8 @@ use App\Courses;
 use App\CourseTopics;
 use App\CourseTopicActivities;
 use PDF;
+use Phpml\Classification\KNearestNeighbors;
+
 
 class TopicController extends Controller
 {
@@ -66,25 +68,44 @@ class TopicController extends Controller
        // dd(DB::getQueryLog());
         return view( 'topics.view_topics',compact('topics','course_id' ) );
     }
+
+    function get_range($level)
+    {
+        $range = array(1,25);
+
+        switch($level)
+        {
+            case 1: $range = array(1,25); break;
+            case 2: $range = array(26,50); break;
+            case 3: $range = array(51,75); break;
+            case 4: $range = array(76,100); break;
+        }
+
+        return $range;
+    }
 	
 	public function studentTopics($course_id){
 		 DB::enableQueryLog();
 
+         
+
         $user_id = Auth::user()->user_id; 
        $topics = CourseTopics::
-                 
-               Join('student_courses', 'student_courses.course_idFK', '=', 'course_topics.course_idFK')
+                 leftJoin('student_test_result', 'student_test_result.topic_idFK', '=', 'course_topics.topic_id')
+               ->Join('student_courses', 'student_courses.course_idFK', '=', 'course_topics.course_idFK')
                ->Join('users', 'users.user_id', '=', 'student_courses.student_idFK')
                ->where('course_topics.course_idFK',$course_id)
                ->where('users.user_level', Auth::user()->user_level)
                ->where('course_topics.topic_level_id',Auth::user()->user_level)
-               //->where('course_topics.topic_level_id', '=','student_test_result.level_id')
-               // ->where(function ($query) 
-               //         {
-               //              $query->where('student_test_result.is_latest', 1)
-               //                    ->orWhereNull('student_test_result.is_latest');
-               //          })
+              // ->where('course_topics.topic_level_id', '=','student_test_result.level_id')
+               ->where(function ($query) 
+                       {
+                            $query->where('student_test_result.is_latest', 1)
+                                  ->orWhereNull('student_test_result.is_latest');
+                        })
                ->get();
+
+      
                 
 /*echo "<pre>";
 print_r($topics);
@@ -120,7 +141,47 @@ exit;*/
   //$topic_id = 1;
         $user_id = Auth::user()->user_id;
      //  $activities = CourseTopicActivities::where('activity_id',$activity_id)->first();
-        $activities = CourseTopicActivities::where('topic_idFK',$topic_id)->simplePaginate(1);
+        //$activities = CourseTopicActivities::where('topic_idFK',$topic_id)->simplePaginate(1);
+
+        ///////////////////////////////////// AI ///////////////////////////////////////////////
+         $user_level     = Auth::user()->user_level; //echo $user_level;
+         $user_weightage = Auth::user()->user_weightage; //echo $user_weightage;
+
+         $range_exploded = $this->get_range($user_level); #get range from user level
+
+         $activity_set  = CourseTopicActivities::where('topic_idFK',$topic_id)
+                           ->where('content_level_value','>=', $range_exploded[0]) #range starts
+                           ->where('content_level_value','<=', $range_exploded[1]) #range end
+                           ->get();
+
+        if(!empty($activity_set))
+        {
+            $sample_data = array();
+            $labels      = array();
+
+            foreach($activity_set as $act)
+            {
+                $sample_data[] = array($user_weightage, $act->content_level_value);
+                $labels[]      = $act->activity_id;
+            }
+
+            $samples = $sample_data;
+            
+//echo  sizeof($samples)." => ".sizeof($labels); //die();
+            //echo "<pre>"; print_r($samples); die();
+            $classifier = new KNearestNeighbors();
+            $classifier->train($samples, $labels);
+
+            $activity_nearest_id =  $classifier->predict([$user_weightage, $user_weightage]);
+//echo $activity_nearest_id; die();
+            $activities = CourseTopicActivities::where('activity_id',$activity_nearest_id)
+                         ->simplePaginate(1);
+                         //->get();
+//die($activities);
+
+        }
+
+         /////////////////////////////////////////////////////////////////////////////////////////
         
     
         return view( 'topics.topic_activity_details',compact('activities','topic_id' ) );
