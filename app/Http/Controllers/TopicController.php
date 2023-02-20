@@ -32,7 +32,7 @@ class TopicController extends Controller
         
     function __construct()
     {       
-		
+		DB::enableQueryLog();
     }
 
 
@@ -166,15 +166,20 @@ exit;*/
             }
 
             $samples = $sample_data;
+
+            $activity_nearest_id = array();
             
 //echo  sizeof($samples)." => ".sizeof($labels); //die();
             //echo "<pre>"; print_r($samples); die();
-            $classifier = new KNearestNeighbors();
-            $classifier->train($samples, $labels);
+            for($loop=1; $loop<=5; $loop++)
+            {
+                $classifier = new KNearestNeighbors($loop);
+                $classifier->train($samples, $labels);
 
-            $activity_nearest_id =  $classifier->predict([$user_weightage, $user_weightage]);
-//echo $activity_nearest_id; die();
-            $activities = CourseTopicActivities::where('activity_id',$activity_nearest_id)
+                $activity_nearest_id[] =  $classifier->predict([$user_weightage, $user_weightage+$loop]);
+            }
+//print_r(array_unique($activity_nearest_id)); die();
+            $activities = CourseTopicActivities::whereIn('activity_id', array_unique($activity_nearest_id))
                          ->simplePaginate(1);
                          //->get();
 //die($activities);
